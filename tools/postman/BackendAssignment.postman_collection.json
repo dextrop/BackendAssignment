@@ -65,7 +65,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Saurabh Pandey\",\n    \"email\": \"scoder91@gmail.com\",\n    \"password\": \"Alpha123\"\n}"
+					"raw": "{\n    \"name\": \"Saurabh Pandey\",\n    \"email\": \"spandey2405@gmail.com\",\n    \"password\": \"Alpha123\"\n}"
 				},
 				"url": {
 					"raw": "{{APP_SERVER_ADDRESS}}/v1/signup/",
@@ -102,7 +102,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"scoder91@gmail.com\",\n    \"password\": \"Alpha123\"\n}"
+					"raw": "{\n    \"email\": \"spandey2405@gmail.com\",\n    \"password\": \"Alpha123\"\n}"
 				},
 				"url": {
 					"raw": "{{APP_SERVER_ADDRESS}}/v1/login/",
@@ -112,6 +112,44 @@
 					"path": [
 						"v1",
 						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Token",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true,
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY5NTgzNjQ2MCwiaWF0IjoxNjk1NzUwMDYwLCJqdGkiOiIyODUyY2E5NGQ1NWU0ODk0YTQ1OTkyOWZjZTdhNjdjNiIsInVzZXJfaWQiOjJ9.0fcgFOW9m2XZnMDvY2SYl1XEJVWalBkKss-Ex0wpH0o\"\n}"
+				},
+				"url": {
+					"raw": "{{APP_SERVER_ADDRESS}}/v1/token/refresh/",
+					"host": [
+						"{{APP_SERVER_ADDRESS}}"
+					],
+					"path": [
+						"v1",
+						"token",
+						"refresh",
 						""
 					]
 				}
@@ -138,7 +176,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "Bearer ",
+						"value": "Bearer eyJhGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk1NzUwMzYwLCJpYXQiOjE2OTU3NTAwNjAsImp0aSI6ImQ4NTg1NTljOWVjYTQ3NGE4ZWM3NDYzMDJlNWQ3Zjg2IiwidXNlcl9pZCI6Mn0.v2IvhIebvKHPBCf6qXuzHezgEd9_gmdK4sukFKLTXps",
 						"type": "text"
 					}
 				],
