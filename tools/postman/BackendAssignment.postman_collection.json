@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "f9146075-8649-41f1-945a-78cef3cfc4a0",
+		"name": "BackendAssignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10525306"
+	},
+	"item": [
+		{
+			"name": "Status",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"content-type": true,
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg4NTAxMTQ5LCJpYXQiOjE2ODg1MDA4NDksImp0aSI6IjZjY2NhNTVmNDg0NDRjZmFhMjVhMjE1ZWNlYzc3ZTMzIiwidXNlcl9pZCI6Mn0.6HO3m_hg-pMxT_4DmrrkCiZvVOxv_r9xronQlXS97lk",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{APP_SERVER_ADDRESS}}/v1/status/",
+					"host": [
+						"{{APP_SERVER_ADDRESS}}"
+					],
+					"path": [
+						"v1",
+						"status",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true,
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg4NTAxMTQ5LCJpYXQiOjE2ODg1MDA4NDksImp0aSI6IjZjY2NhNTVmNDg0NDRjZmFhMjVhMjE1ZWNlYzc3ZTMzIiwidXNlcl9pZCI6Mn0.6HO3m_hg-pMxT_4DmrrkCiZvVOxv_r9xronQlXS97lk",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Saurabh Pandey\",\n    \"email\": \"scoder91@gmail.com\",\n    \"password\": \"Alpha123\"\n}"
+				},
+				"url": {
+					"raw": "{{APP_SERVER_ADDRESS}}/v1/signup/",
+					"host": [
+						"{{APP_SERVER_ADDRESS}}"
+					],
+					"path": [
+						"v1",
+						"signup",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true,
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg4NTAxMTQ5LCJpYXQiOjE2ODg1MDA4NDksImp0aSI6IjZjY2NhNTVmNDg0NDRjZmFhMjVhMjE1ZWNlYzc3ZTMzIiwidXNlcl9pZCI6Mn0.6HO3m_hg-pMxT_4DmrrkCiZvVOxv_r9xronQlXS97lk",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"scoder91@gmail.com\",\n    \"password\": \"Alpha123\"\n}"
+				},
+				"url": {
+					"raw": "{{APP_SERVER_ADDRESS}}/v1/login/",
+					"host": [
+						"{{APP_SERVER_ADDRESS}}"
+					],
+					"path": [
+						"v1",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
