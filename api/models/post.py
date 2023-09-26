@@ -12,8 +12,6 @@ class Post(models.Model):
     _created = models.DateTimeField(auto_now_add=True)
     _updated = models.DateTimeField(auto_now=True)
 
-    USERNAME_FIELD = 'id' # Added this line
-
     @property
     def is_authenticated(self):
         return True
