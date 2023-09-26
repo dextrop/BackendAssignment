@@ -6,7 +6,7 @@ class Post(models.Model):
     title = models.CharField(default="", max_length=200)
     description = models.CharField(default="", max_length=200)
     keyword = models.CharField(default="", max_length=200)
-    content = models.CharField(default="", max_length=13)
+    content = models.CharField(default="", max_length=5000)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     _created = models.DateTimeField(auto_now_add=True)

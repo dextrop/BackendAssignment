@@ -2,31 +2,49 @@ from api.models import Post
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from api.serializers.postserializer import PostSerializer
 
-class PostController:
+
+class PostController():
     """
     Controller for handling Post related operations.
     """
+
     def get_post(self, post_id):
-        if post_id:
-            try:
-                student = Post.objects.get(id=post_id)
-                return PostSerializer(student).data
-            except Exception as e:
-                raise ValidationError("Unable to find post with id: " + post_id)
-
-        students = Post.objects.all()
-        return PostSerializer(students, many=True).data
-
-    def add_post(self, postInfo, user):
-
         """
-        Create a new post
+        Retrieve a specific post by its ID or all posts if no ID is provided.
 
         Args:
-            postInfo (str): Post related information.
-            user (str): user object
+            post_id (str) (optional): The ID of the post to retrieve.
 
-        Returns: Created Post Information.
+        Returns:
+            dict: Serialized data of the specified post or all posts.
+
+        Raises:
+            ValidationError: If the post with the specified ID is not found.
+        """
+        if post_id:
+            try:
+                post = Post.objects.get(id=post_id)
+                return PostSerializer(post).data
+            except ObjectDoesNotExist:
+                raise ValidationError("Unable to find post with id: " + post_id)
+
+        all_posts = Post.objects.all()
+        return PostSerializer(all_posts, many=True).data
+
+    def add_post(self, postInfo, user):
+        """
+        Create a new post entry in the database.
+
+        Args:
+            postInfo (dict): Dictionary containing the post's information.
+                             It should include keys such as "title" and "content".
+            user (User): The user object indicating who is creating the post.
+
+        Returns:
+            dict: Serialized data of the created post.
+
+        Raises:
+            ValidationError: If required keys are missing or if a duplicate post is detected.
         """
         required_keys = ["title", "content"]
         for key in required_keys:
@@ -36,8 +54,8 @@ class PostController:
         postInfo["created_by"] = user
         try:
             created_post = Post.objects.create(**postInfo)
-            return PostSerializer(created_post, many=False).data
+            return PostSerializer(created_post).data
         except Exception as e:
-            if (str(e) == "UNIQUE constraint failed: post.title, post.content, post.created_by_id"):
+            if str(e) == "UNIQUE constraint failed: post.title, post.content, post.created_by_id":
                 raise ValidationError("Duplicate Post")
             raise ValidationError(str(e))

@@ -1,5 +1,4 @@
 import traceback
-
 from rest_framework import exceptions
 from rest_framework.status import (
     HTTP_400_BAD_REQUEST,
@@ -13,25 +12,33 @@ from api.lib.customresponse import CustomResponse
 
 def custom_exception_handler(exc, context):
     """
-    Custom exception handler for Django Rest Framework that adds
-    the `status_code` to the response and renames the `detail` key to `error`.
-    """
-    response = exception_handler(exc, context)
+    Custom exception handler for Django Rest Framework.
 
+    This handler:
+    - Modifies the standard DRF exception response to include status_code.
+    - Renames the 'detail' key to 'error'.
+    - Addresses an issue with DRF converting 401 responses to 403.
+
+    Args:
+        exc: The exception instance.
+        context: A dictionary containing keys for the view, request, args, and kwargs.
+
+    Returns:
+        CustomResponse: A modified response for the exception.
+    """
+
+    response = exception_handler(exc, context)
     stack = traceback.format_exc()
+    # Uncomment the next line to log the exception stack trace.
     # logger.exception(stack)
 
-    if response is not None:
-        """
-        below code is needed because rest framework return 403 response if it gets a 401 response.
-        more details here: https://github.com/encode/django-rest-framework/issues/5968
-        either this way works or ensure authenticate_header does not return None in your authentication Class.
-        also see line 455 of 'env/lib/python3.9/site-packages/rest_framework/views.py'
-        i.e. WWW-Authenticate header for 401 responses, else coerce to 403
-        """
-        if isinstance(
-            exc, (exceptions.AuthenticationFailed, exceptions.NotAuthenticated)
-        ):
+    if response:
+        # DRF converts a 401 (unauthorized) response to 403 (forbidden).
+        # The workaround ensures that exceptions related to authentication
+        # correctly return a 401 status.
+        # Refer: https://github.com/encode/django-rest-framework/issues/5968
+        # Another approach would be to ensure `authenticate_header` doesn't return None in your authentication class.
+        if isinstance(exc, (exceptions.AuthenticationFailed, exceptions.NotAuthenticated)):
             response.status_code = HTTP_401_UNAUTHORIZED
             exc.status_code = 401
 
@@ -40,39 +47,35 @@ def custom_exception_handler(exc, context):
         )
 
     else:
+        # Handle various exceptions and set appropriate response messages and codes.
         message = None
         code = HTTP_501_NOT_IMPLEMENTED
 
-        if exc.__class__.__name__ == "DoesNotExist":
+        exc_name = exc.__class__.__name__
+        if exc_name == "DoesNotExist":
             code = HTTP_500_INTERNAL_SERVER_ERROR
             message = exc.message
-
-        elif (exc.__class__.__name__ == "KeyError") or (
-            exc.__class__.__name__ == "MultiValueDictKeyError"
-        ):
+        elif exc_name in ["KeyError", "MultiValueDictKeyError"]:
             code = HTTP_400_BAD_REQUEST
             try:
                 message = "Bad request must pass %s" % exc.message
-            except Exception as e:
+            except Exception:
                 message = "Missing key in request data, please check"
-
-        elif exc.__class__.__name__ == "ValidationError":
+        elif exc_name == "ValidationError":
             code = HTTP_400_BAD_REQUEST
             message = exc.message
-
-        elif exc.__class__.__name__ == "IntegrityError":
+        elif exc_name == "IntegrityError":
             code = HTTP_400_BAD_REQUEST
             message = exc[1]
-
-        elif exc.__class__.__name__ == "error":
+        elif exc_name == "error":
             code = HTTP_500_INTERNAL_SERVER_ERROR
             message = "socket error"
-
         else:
             code = HTTP_500_INTERNAL_SERVER_ERROR
             message = "Unhandled Exception"
 
         response = CustomResponse(
-            message=message, etype=exc.__class__.__name__, code=code
+            message=message, etype=exc_name, code=code
         )
+
     return response

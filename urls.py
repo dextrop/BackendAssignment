@@ -18,6 +18,7 @@ from api.views.status import StatusView
 from api.views.signup import SignupView
 from api.views.post import PostView
 from api.views.login import LoginView
+
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )

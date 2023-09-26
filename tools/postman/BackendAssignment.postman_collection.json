@@ -24,12 +24,6 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg4NTAxMTQ5LCJpYXQiOjE2ODg1MDA4NDksImp0aSI6IjZjY2NhNTVmNDg0NDRjZmFhMjVhMjE1ZWNlYzc3ZTMzIiwidXNlcl9pZCI6Mn0.6HO3m_hg-pMxT_4DmrrkCiZvVOxv_r9xronQlXS97lk",
-						"type": "text",
-						"disabled": true
 					}
 				],
 				"body": {
@@ -67,12 +61,6 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg4NTAxMTQ5LCJpYXQiOjE2ODg1MDA4NDksImp0aSI6IjZjY2NhNTVmNDg0NDRjZmFhMjVhMjE1ZWNlYzc3ZTMzIiwidXNlcl9pZCI6Mn0.6HO3m_hg-pMxT_4DmrrkCiZvVOxv_r9xronQlXS97lk",
-						"type": "text",
-						"disabled": true
 					}
 				],
 				"body": {
@@ -110,12 +98,6 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg4NTAxMTQ5LCJpYXQiOjE2ODg1MDA4NDksImp0aSI6IjZjY2NhNTVmNDg0NDRjZmFhMjVhMjE1ZWNlYzc3ZTMzIiwidXNlcl9pZCI6Mn0.6HO3m_hg-pMxT_4DmrrkCiZvVOxv_r9xronQlXS97lk",
-						"type": "text",
-						"disabled": true
 					}
 				],
 				"body": {
@@ -130,6 +112,125 @@
 					"path": [
 						"v1",
 						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true,
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Django is best\",\n    \"description\": \"this is a sample article\",\n    \"content\": \"this is some content\",\n    \"keyword\": \"a,b,c,d\"\n}"
+				},
+				"url": {
+					"raw": "{{APP_SERVER_ADDRESS}}/v1/post/",
+					"host": [
+						"{{APP_SERVER_ADDRESS}}"
+					],
+					"path": [
+						"v1",
+						"post",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Post By ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"content-type": true,
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{APP_SERVER_ADDRESS}}/v1/post/1/",
+					"host": [
+						"{{APP_SERVER_ADDRESS}}"
+					],
+					"path": [
+						"v1",
+						"post",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Post",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"content-type": true,
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{APP_SERVER_ADDRESS}}/v1/post/",
+					"host": [
+						"{{APP_SERVER_ADDRESS}}"
+					],
+					"path": [
+						"v1",
+						"post",
 						""
 					]
 				}
