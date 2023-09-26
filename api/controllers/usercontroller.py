@@ -38,10 +38,6 @@ class UserController:
         password = userInfo.get("password")
         hashed_password, salt = hash_password(password)
         userInfo["password"], userInfo["salt"] = hashed_password, salt
-        import json
-        print (
-            json.dumps(userInfo)
-        )
         return User.objects.create(**userInfo)
 
     def login(self, email, password):
@@ -59,7 +55,6 @@ class UserController:
         if user is None:
             raise ValidationError("user does not exits")
 
-        print (user.password, user.salt)
         hashed_password, salt = hash_password(password, user.salt)
         if hashed_password != user.password:
             raise ValidationError("invalid password")

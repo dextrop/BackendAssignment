@@ -25,3 +25,4 @@ class Post(models.Model):
     class Meta:
         db_table = 'post'
         app_label = 'api'
+        unique_together = ('title', 'content', 'created_by')
